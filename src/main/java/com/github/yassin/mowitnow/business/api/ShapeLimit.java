@@ -1,6 +1,6 @@
-package com.github.yassin.mowitnow.api;
+package com.github.yassin.mowitnow.business.api;
 
-import com.github.yassin.mowitnow.business.domain.Position;
+import com.github.yassin.mowitnow.business.Position;
 
 /**
  *  a ShapeLimit define à limit of Shape.
