@@ -18,7 +18,8 @@ import com.github.yassin.mowitnow.exceptions.EngineException;
  */
 public class Mower implements MovableElement, Engine {
 
-	private Logger log = Logger.getLogger(MowerTest.class);
+	private int id;
+	private Logger log = Logger.getLogger(Mower.class);
 	private Position currentPosition;
 	private Orientation currentOrientation;
 	private Lawn lawn;
@@ -80,6 +81,20 @@ public class Mower implements MovableElement, Engine {
 
 	public boolean isStarted() {
 		return engineStarted;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	@Override
+	public String toString() {
+		return "Mower [currentPosition=" + currentPosition
+				+ ", currentOrientation=" + currentOrientation + "]";
 	}
 
 }

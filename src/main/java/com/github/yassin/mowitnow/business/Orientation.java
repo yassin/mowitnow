@@ -61,7 +61,7 @@ public class Orientation {
 
 	@Override
 	public String toString() {
-		return "Orientation = " + this.orientationEnum.name();
+		return "Orientation { " + this.orientationEnum.name() + " }";
 	}
 
 	@Override

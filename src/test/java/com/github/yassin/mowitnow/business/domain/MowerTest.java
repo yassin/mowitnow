@@ -90,6 +90,7 @@ public class MowerTest {
 				mower.stop();
 			mower.start();
 		} catch (EngineException e) {
+			Assert.fail();
 		}
 		Assert.assertEquals(mower.isStarted(), true);
 	}
@@ -101,6 +102,7 @@ public class MowerTest {
 			if (!mower.isStarted())
 				mower.start();
 			mower.start();
+			Assert.fail();
 		} catch (EngineException e) {
 			Assert.assertEquals(e.getMessage(), "Engine already started");
 		}
@@ -114,6 +116,7 @@ public class MowerTest {
 			mower.stop();
 			Assert.assertEquals(mower.isStarted(), false);
 		} catch (EngineException e) {
+			Assert.fail();
 		}
 	}
 
@@ -123,6 +126,7 @@ public class MowerTest {
 			if (mower.isStarted())
 				mower.stop();
 			mower.stop();
+			Assert.fail();
 		} catch (EngineException e) {
 			Assert.assertEquals(e.getMessage(), "Engine already stopped");
 		}

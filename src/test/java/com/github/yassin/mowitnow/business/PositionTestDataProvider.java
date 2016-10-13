@@ -47,4 +47,19 @@ public class PositionTestDataProvider {
 	public static Object[][] backward_south() {
 		return new Object[][] { { DirectionEnum.BACKWARD, OrientationEnum.SOUTH } };
 	}
+	
+	@DataProvider(name = "position_5_5")
+	public static Object[][] position_5_5() {
+		return new Object[][] { { "5 5"} };
+	}
+	
+	@DataProvider(name = "position_5_5_5")
+	public static Object[][] position_5_5_5() {
+		return new Object[][] { {"5 5   5" } };
+	}
+	
+	@DataProvider(name = "position_5")
+	public static Object[][] position_5() {
+		return new Object[][] { {"5" } };
+	}
 }

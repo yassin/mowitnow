@@ -1,7 +1,11 @@
 package com.github.yassin.mowitnow.business;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.github.yassin.mowitnow.business.enums.DirectionEnum;
 import com.github.yassin.mowitnow.business.enums.OrientationEnum;
+import com.github.yassin.mowitnow.exceptions.ParsingException;
 
 /**
  * Position represent a position of movable and offer some method of moving to
@@ -69,6 +73,23 @@ public class Position {
 			break;
 		}
 		return this;
+	}
+
+	/**
+	 * Return Position from String (5 5)
+	 * 
+	 * @throws ParsingException
+	 */
+	public static Position parsePositionFromString(String line)
+			throws ParsingException {
+
+		Pattern paternPositionMatcher = Pattern.compile("^(\\d+)[ ](\\d+)$");
+		Matcher m = paternPositionMatcher.matcher(line);
+		if (m.matches()) {
+			return new Position(Integer.parseInt(m.group(1)),
+					Integer.parseInt(m.group(2)));
+		}
+		throw new ParsingException("Parsing position error of line :"+line);
 	}
 
 	@Override

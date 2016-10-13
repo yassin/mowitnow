@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import com.github.yassin.mowitnow.business.enums.DirectionEnum;
 import com.github.yassin.mowitnow.business.enums.OrientationEnum;
+import com.github.yassin.mowitnow.exceptions.ParsingException;
 
 /**
  * Position Test
@@ -104,6 +105,40 @@ public class PositionTest {
 		Position newPosition = this.position.next(direction, orientation);
 		Assert.assertEquals(newPosition.getX(), 2);
 		Assert.assertEquals(newPosition.getY(), 2);
+	}
+	
+	@Test(dataProviderClass = PositionTestDataProvider.class, dataProvider = "position_5_5")
+	public void parsePositionFromString_must_return_5_5(String line) {
+		resetPositionBetweenTest();
+		Position newPosition;
+		try {
+			newPosition = Position.parsePositionFromString(line);
+			Assert.assertEquals(newPosition.getX(), 5);
+			Assert.assertEquals(newPosition.getY(), 5);
+		} catch (ParsingException e) {
+			Assert.fail();
+		}
+		
+	}
+	
+	@Test(dataProviderClass = PositionTestDataProvider.class, dataProvider = "position_5_5_5")
+	public void parsePositionFromString_must_throw_parse_exception(String line) {
+		resetPositionBetweenTest();
+		try {
+			Position.parsePositionFromString(line);
+		} catch (ParsingException e) {
+			Assert.assertEquals(e.getMessage(), "Parsing position error of line :"+line);
+		}
+	}
+	
+	@Test(dataProviderClass = PositionTestDataProvider.class, dataProvider = "position_5")
+	public void parsePositionFromString_must_throw_parse_exception_(String line) {
+		resetPositionBetweenTest();
+		try {
+			Position.parsePositionFromString(line);
+		} catch (ParsingException e) {
+			Assert.assertEquals(e.getMessage(), "Parsing position error of line :"+line);
+		}
 	}
 
 }

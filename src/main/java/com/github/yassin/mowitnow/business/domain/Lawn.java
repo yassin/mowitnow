@@ -5,7 +5,7 @@ import com.github.yassin.mowitnow.business.api.ShapeLimit;
 
 /**
  * Lawn is rectangular Shape with limit defined by topRight position
- * @author p080152
+ * @author Yassin
  *
  */
 public class Lawn implements ShapeLimit {
@@ -27,6 +27,10 @@ public class Lawn implements ShapeLimit {
 				& position.getX()>= 0 & position.getY() >= 0 )
 			return true;
 		return false;
+	}
+
+	public Position getTopRight() {
+		return topRight;
 	}
 
 }
