@@ -57,22 +57,23 @@ public class Position {
 			throw new IllegalArgumentException("Unknown orientation: "
 					+ orientation);
 		}
-
+		int x = this.x;
+		int y = this.y;
 		switch (orientation.getOrienationType()) {
 		case 1:
-			this.y = this.y + direction.getType();
+			y = y + direction.getType();
 			break;
 		case 2:
-			this.x = this.x + direction.getType();
+			x = x + direction.getType();
 			break;
 		case 3:
-			this.y = this.y - direction.getType();
+			y = y - direction.getType();
 			break;
 		case 4:
-			this.x = this.x - direction.getType();
+			x = x - direction.getType();
 			break;
 		}
-		return this;
+		return new Position(x, y);
 	}
 
 	/**

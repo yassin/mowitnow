@@ -21,7 +21,7 @@ public class PositionTest {
 	/**
 	 * Test initialization
 	 * 
-	 * We assume for all tests that : - the first position is (1,2)
+	 * We assume for all tests that : - the first position is (1,2)	
 	 */
 	@BeforeTest
 	public void setUp() {

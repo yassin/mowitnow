@@ -17,15 +17,21 @@ public class App {
 
 	public static void main(String[] args) throws FileNotFoundException,
 			ParsingException, IOException {
+		run(args);
+	}
+
+	public static int run(String[] args) throws FileNotFoundException,
+			ParsingException, IOException {
 		// Usage
 		if (args.length != 1 || args[0] == null) {
 			log.info("Usage : Mowitnow.jar <filePath>");
-			return;
+			return 0;
 		}
 
 		String filePath = args[0];
 
 		MowersRunner runner = new MowersRunner();
 		runner.run(filePath);
+		return 1;
 	}
 }

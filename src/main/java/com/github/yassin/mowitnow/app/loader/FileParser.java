@@ -4,8 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.github.yassin.mowitnow.business.Orientation;
 import com.github.yassin.mowitnow.business.Position;
@@ -32,7 +33,22 @@ public class FileParser {
 			throws FileNotFoundException, ParsingException, IOException {
 
 		Context contextResult = new Context();
-		HashMap<Mower, List<MowerCommand>> mowers = new HashMap<Mower, List<MowerCommand>>();
+
+		// sort Mower
+		Comparator<Mower> comparator = new Comparator<Mower>() {
+
+			public int compare(Mower o1, Mower o2) {
+				if (o1.getId() < o2.getId())
+					return -1;
+				else if (o1.getId() > o2.getId())
+					return 1;
+				else if (o1.getId() == o2.getId())
+					return 1;
+				return 2;
+			}
+		};
+
+		TreeMap<Mower, List<MowerCommand>> mowers = new TreeMap<Mower, List<MowerCommand>>(comparator);
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		String line = br.readLine();
 		// first line define limit Lawn
@@ -42,14 +58,16 @@ public class FileParser {
 		// load Mowers
 		int mowerId = 1;
 		while (line != null) {
-			String orientation = line.substring(line.length()-1, line.length());
-			String position = line.substring(0, line.length()-2);
+			String orientation = line.substring(line.length() - 1,
+					line.length());
+			String position = line.substring(0, line.length() - 2);
 			Orientation currentOrientation = new Orientation(
 					OrientationEnum.parseOrientation(orientation));
-			Position currentPosition = Position.parsePositionFromString(position);
-			
+			Position currentPosition = Position
+					.parsePositionFromString(position);
+
 			Mower mower = new Mower(currentPosition, currentOrientation, lawn);
-			
+
 			mower.setId(mowerId);
 			line = br.readLine();
 			List<MowerCommand> mowersComamnd = MowerCommand.parseCommands(line);

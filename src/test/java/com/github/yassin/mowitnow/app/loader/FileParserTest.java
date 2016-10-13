@@ -2,10 +2,8 @@ package com.github.yassin.mowitnow.app.loader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -56,23 +54,8 @@ public class FileParserTest {
 			Assert.assertEquals(context.getMowers().size(), 2);
 			int i = 0;
 			
-			// sort Mower
-			Comparator<Mower> comparator = new Comparator<Mower>() {
-
-				public int compare(Mower o1, Mower o2) {
-					if (o1.getId() < o2.getId())
-						return -1;
-					else if (o1.getId() > o2.getId())
-						return 1;
-					else if (o1.getId() == o2.getId())
-						return 1;
-					return 2;
-				}
-			};
-			TreeMap<Mower, List<MowerCommand>> sortedMap = new TreeMap<Mower, List<MowerCommand>>(comparator);
-			sortedMap.putAll(context.getMowers());
-			
-			for (Map.Entry<Mower, List<MowerCommand>> entry : sortedMap.entrySet()) {
+						
+			for (Map.Entry<Mower, List<MowerCommand>> entry : context.getMowers().entrySet()) {
 				Mower mower = entry.getKey();
 				List<MowerCommand> mowerCommands = entry.getValue();
 				Assert.assertEquals(
